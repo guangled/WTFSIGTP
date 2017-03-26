@@ -2,7 +2,7 @@
 * @Author: guangled
 * @Date:   2017-03-25 13:43:16
 * @Last Modified by:   guangled
-* @Last Modified time: 2017-03-26 04:10:35
+* @Last Modified time: 2017-03-26 08:51:30
 */
 
 import React, { Component } from 'react';
@@ -17,14 +17,17 @@ class GoogleMap extends Component {
 			lat: 0,
 			lng: 0,
 			map: null,
-			directionsDisplay: null
+			directionsDisplay: null,
+            arr :[]
+
 		}
 
 		this.draw = this.draw.bind(this);
 	}
 
 	draw(lat, lng){
-								
+
+
 		
                 //this.marker = new google.maps.Marker({position: this.state, map: this.state.map});
 
@@ -42,15 +45,22 @@ class GoogleMap extends Component {
                     destination : end,
                     travelMode : google.maps.TravelMode.DRIVING
                 };
+
                 var directionsService = new google.maps.DirectionsService();
                 directionsService.route(request, function(response, status){
                 	if (status == google.maps.DirectionsStatus.OK) {
                         tempDirectionsDisplay.setDirections(response);
+                        console.log(response.routes[0].legs[0].distance.text);
+                        console.log(response.routes[0].legs[0].duration.text);
+                        //this.state.arr = [response.routes[0].legs[0].distance.text,response.routes[0].legs[0].duration.text];
+
                     }
                 });
+                //
 	}
 
 	componentDidMount() {
+
 		if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
 
@@ -63,7 +73,7 @@ class GoogleMap extends Component {
 
 								this.map = new google.maps.Map(this.refs.map, {
                     center: {lat: this.state.lat, lng: this.state.lng},
-                    zoom:15
+                    zoom:12
                 });
 
                 var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -82,10 +92,13 @@ class GoogleMap extends Component {
 
 	render() {
 		// this.refs.map
+
 		return (
 			<div className='mainb'>
-				<MainButton drawb = {this.draw} getFirstEvent = {this.getFirstEvent}/>
-				<div ref="map" className="map" />
+                <div ref="map" className="map">
+                </div>
+                <MainButton drawb = {this.draw} getFirstEvent = {this.getFirstEvent} />
+
 			</div>
 		)
 	}

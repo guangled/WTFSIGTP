@@ -2,9 +2,11 @@
 * @Author: guangled
 * @Date:   2017-03-25 17:59:37
 * @Last Modified by:   guangled
-* @Last Modified time: 2017-03-26 03:45:48
+* @Last Modified time: 2017-03-26 09:22:28
 */
 import React, { Component } from 'react';
+import Detail from './detail';
+import Description from './Description';
 
 class MainButton extends Component {
 	constructor(props) {
@@ -21,7 +23,10 @@ class MainButton extends Component {
   		}
   		this.state={
   			data: [],
-  			index: 0
+  			index: 0,
+			msg : "",
+			des :"",
+			arr : []
   		};
 
   		this.nextEvent = this.nextEvent.bind(this);
@@ -46,19 +51,49 @@ class MainButton extends Component {
 				this.setState({index: index + 1});
 				var latv = this.state.data[index].latitude;
 				var lonv = this.state.data[index].longitude;
-				this.props.drawb(latv, lonv);
+
+				this.state.msg = this.state.data[index].title;
+
+				this.state.des = this.state.data[index].description;
+
+               this.props.drawb(latv, lonv);
 			}
 
 
 
 	render() {
+		if(this.state.index == 0 ) {
+			if(this.state.data[0]){
+                this.state.msg = this.state.data[0].title;
+                this.state.des = this.state.data[0].description;
+			}
 
+		}
+		//console.log(this.state.arr);
+		if(!this.state.msg) this.state.msg = "untitled";
+		if(!this.state.des) this.state.des = "no description";
 		return (
-				<button
-					type="button"
-					className="button" 
-					onClick={this.nextEvent}>Change
-				</button>
+		<div className="front">
+			<table className="table">
+				<tbody>
+					<tr>
+						<th><Detail msg={this.state.msg} /></th>
+						<th><button
+							type="button"
+							className="button btn-primary btn-lg"
+							onClick={this.nextEvent}>Where to Play?
+						</button></th>
+					</tr>
+					{/*<tr>*/}
+						{/*<td>{this.props.dis}</td>*/}
+						{/*<td>{this.props.dur}</td>*/}
+					{/*</tr>*/}
+				</tbody>
+			</table>
+			<Description des = {this.state.des} />
+
+		</div>
+
 		);
 	}
 }
