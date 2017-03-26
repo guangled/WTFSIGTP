@@ -17,15 +17,16 @@ class GoogleMap extends Component {
 			lat: 0,
 			lng: 0,
 			map: null,
-			directionsDisplay: null
+			directionsDisplay: null,
+            arr :[]
+
 		}
 
 		this.draw = this.draw.bind(this);
 	}
 
 	draw(lat, lng){
-								
-		
+
                 //this.marker = new google.maps.Marker({position: this.state, map: this.state.map});
 
                 var start = new google.maps.LatLng(this.state.lat, this.state.lng);
@@ -42,15 +43,23 @@ class GoogleMap extends Component {
                     destination : end,
                     travelMode : google.maps.TravelMode.DRIVING
                 };
+
                 var directionsService = new google.maps.DirectionsService();
                 directionsService.route(request, function(response, status){
                 	if (status == google.maps.DirectionsStatus.OK) {
                         tempDirectionsDisplay.setDirections(response);
+
+                        console.log(response.routes[0].legs[0].distance.text);
+                        console.log(response.routes[0].legs[0].duration.text);
+                        //this.state.arr = [response.routes[0].legs[0].distance.text,response.routes[0].legs[0].duration.text];
+
                     }
                 });
+                //
 	}
 
 	componentDidMount() {
+
 		if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
 
@@ -70,7 +79,7 @@ class GoogleMap extends Component {
 
                 this.setState({map: this.map});
                 this.setState({directionsDisplay: directionsDisplay});
-                
+
                 //this.draw(this.pos.lat, this.pos.lng);
 
             }, () => {
@@ -82,10 +91,13 @@ class GoogleMap extends Component {
 
 	render() {
 		// this.refs.map
+
 		return (
 			<div className='mainb'>
-				<MainButton drawb = {this.draw} getFirstEvent = {this.getFirstEvent}/>
-				<div ref="map" className="map" />
+                <div ref="map" className="map">
+                </div>
+                <MainButton drawb = {this.draw} getFirstEvent = {this.getFirstEvent} />
+
 			</div>
 		)
 	}

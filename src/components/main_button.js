@@ -6,6 +6,10 @@
 */
 import React, { Component } from 'react';
 
+import Detail from './detail';
+import Description from './Description';
+
+
 class MainButton extends Component {
 	constructor(props) {
 		super(props);
@@ -21,14 +25,17 @@ class MainButton extends Component {
   		}
   		this.state={
   			data: [],
-  			index: 0
+  			index: 0,
+			msg : "",
+			des :"",
+			arr : []
   		};
 
   		this.nextEvent = this.nextEvent.bind(this);
 			this.processData = this.processData.bind(this);
 
 			EVDB.API.call("/events/search", oArgs, this.processData);
-			
+
 	}
 
 			processData(oData) {
@@ -46,19 +53,48 @@ class MainButton extends Component {
 				this.setState({index: index + 1});
 				var latv = this.state.data[index].latitude;
 				var lonv = this.state.data[index].longitude;
-				this.props.drawb(latv, lonv);
+
+				this.state.msg = this.state.data[index].title;
+
+				this.state.des = this.state.data[index].description;
+
+               this.props.drawb(latv, lonv);
+
 			}
 
 
 
 	render() {
+		if(this.state.index == 0 ) {
+			if(this.state.data[0]){
+                this.state.msg = this.state.data[0].title;
+                this.state.des = this.state.data[0].description;
+			}
 
+		}
+		//console.log(this.state.arr);
+		if(!this.state.msg) this.state.msg = "untitled";
+		if(!this.state.des) this.state.des = "no description";
 		return (
-				<button
-					type="button"
-					className="button" 
-					onClick={this.nextEvent}>Change
-				</button>
+		<div>
+			<table className="table">
+				<tr>
+					<th><Detail msg={this.state.msg} /></th>
+					<th><button
+						type="button"
+						className="button btn btn-primary"
+						onClick={this.nextEvent}>Change
+					</button></th>
+				</tr>
+				{/*<tr>*/}
+					{/*<td>{this.props.dis}</td>*/}
+					{/*<td>{this.props.dur}</td>*/}
+				{/*</tr>*/}
+
+			</table>
+			<Description des = {this.state.des}/>
+
+		</div>
 		);
 	}
 }
