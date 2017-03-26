@@ -2,13 +2,11 @@
 * @Author: guangled
 * @Date:   2017-03-25 17:59:37
 * @Last Modified by:   guangled
-* @Last Modified time: 2017-03-26 03:45:48
+* @Last Modified time: 2017-03-26 09:22:28
 */
 import React, { Component } from 'react';
-
 import Detail from './detail';
 import Description from './Description';
-
 
 class MainButton extends Component {
 	constructor(props) {
@@ -35,7 +33,7 @@ class MainButton extends Component {
 			this.processData = this.processData.bind(this);
 
 			EVDB.API.call("/events/search", oArgs, this.processData);
-
+			
 	}
 
 			processData(oData) {
@@ -59,7 +57,6 @@ class MainButton extends Component {
 				this.state.des = this.state.data[index].description;
 
                this.props.drawb(latv, lonv);
-
 			}
 
 
@@ -76,25 +73,27 @@ class MainButton extends Component {
 		if(!this.state.msg) this.state.msg = "untitled";
 		if(!this.state.des) this.state.des = "no description";
 		return (
-		<div>
+		<div className="front">
 			<table className="table">
-				<tr>
-					<th><Detail msg={this.state.msg} /></th>
-					<th><button
-						type="button"
-						className="button btn btn-primary"
-						onClick={this.nextEvent}>Change
-					</button></th>
-				</tr>
-				{/*<tr>*/}
-					{/*<td>{this.props.dis}</td>*/}
-					{/*<td>{this.props.dur}</td>*/}
-				{/*</tr>*/}
-
+				<tbody>
+					<tr>
+						<th><Detail msg={this.state.msg} /></th>
+						<th><button
+							type="button"
+							className="button btn-primary btn-lg"
+							onClick={this.nextEvent}>Where to Play?
+						</button></th>
+					</tr>
+					{/*<tr>*/}
+						{/*<td>{this.props.dis}</td>*/}
+						{/*<td>{this.props.dur}</td>*/}
+					{/*</tr>*/}
+				</tbody>
 			</table>
-			<Description des = {this.state.des}/>
+			<Description des = {this.state.des} />
 
 		</div>
+
 		);
 	}
 }

@@ -9,7 +9,7 @@ class Description extends Component {
     render() {
 
         return (
-            <div className="well">{this.props.des}</div>
+            <div className="well front-des">{this.props.des}</div>
         );
     }
 }

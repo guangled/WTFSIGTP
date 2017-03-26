@@ -2,7 +2,7 @@
 * @Author: guangled
 * @Date:   2017-03-25 13:43:16
 * @Last Modified by:   guangled
-* @Last Modified time: 2017-03-26 04:10:35
+* @Last Modified time: 2017-03-26 08:51:30
 */
 
 import React, { Component } from 'react';
@@ -27,6 +27,8 @@ class GoogleMap extends Component {
 
 	draw(lat, lng){
 
+
+		
                 //this.marker = new google.maps.Marker({position: this.state, map: this.state.map});
 
                 var start = new google.maps.LatLng(this.state.lat, this.state.lng);
@@ -48,7 +50,6 @@ class GoogleMap extends Component {
                 directionsService.route(request, function(response, status){
                 	if (status == google.maps.DirectionsStatus.OK) {
                         tempDirectionsDisplay.setDirections(response);
-
                         console.log(response.routes[0].legs[0].distance.text);
                         console.log(response.routes[0].legs[0].duration.text);
                         //this.state.arr = [response.routes[0].legs[0].distance.text,response.routes[0].legs[0].duration.text];
@@ -72,14 +73,14 @@ class GoogleMap extends Component {
 
 								this.map = new google.maps.Map(this.refs.map, {
                     center: {lat: this.state.lat, lng: this.state.lng},
-                    zoom:15
+                    zoom:12
                 });
 
                 var directionsDisplay = new google.maps.DirectionsRenderer();
 
                 this.setState({map: this.map});
                 this.setState({directionsDisplay: directionsDisplay});
-
+                
                 //this.draw(this.pos.lat, this.pos.lng);
 
             }, () => {
