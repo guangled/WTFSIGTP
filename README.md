@@ -10,3 +10,7 @@ Where the fuck should I go to play?
 3. npm Installation
 4. npm start
 5. visit localhost:9090. You can change the port number in the webpack.config.js file.
+
+# Reference
+1. https://github.com/StephenGrider/ReduxSimpleStarter.git
+This project is our start point and it provides a simple react.js development environment. If you want to develop a simple react.js application, you can try this project.
