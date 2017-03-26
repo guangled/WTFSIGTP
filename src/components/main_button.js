@@ -2,10 +2,9 @@
 * @Author: guangled
 * @Date:   2017-03-25 17:59:37
 * @Last Modified by:   guangled
-* @Last Modified time: 2017-03-26 01:22:03
+* @Last Modified time: 2017-03-26 03:45:48
 */
 import React, { Component } from 'react';
-import { fetchEvent } from '../actions/index';
 
 class MainButton extends Component {
 	constructor(props) {
@@ -25,28 +24,41 @@ class MainButton extends Component {
   			index: 0
   		};
 
-			EVDB.API.call("/events/search", oArgs, function(oData) {
-				console.log('request:', oData.events);
+  		this.nextEvent = this.nextEvent.bind(this);
+			this.processData = this.processData.bind(this);
+
+			EVDB.API.call("/events/search", oArgs, this.processData);
+			
+	}
+
+			processData(oData) {
+				// console.log('request:', oData.events);
 				// Note: this relies on the custom toString() methods below
 				const request = oData.events.event;
 				this.setState({data: request});
-		  });
+				this.nextEvent();
+		  }
 
 			nextEvent(){
 				var index = this.state.index;
-				this.state.data[index];
-				this.setState({index + 1});
+				var event = this.state.data[index];
+				// console.log(event.latitude, event.longitude);
+				this.setState({index: index + 1});
+				var latv = this.state.data[index].latitude;
+				var lonv = this.state.data[index].longitude;
+				this.props.drawb(latv, lonv);
 			}
 
-			this.nextEvent = this.nextEvent.bind(this);
-	}
+
 
 	render() {
+
 		return (
-			<button
-				type="button"
-				className="button"
-				onClick={this.nextEvent}>Change</button>
+				<button
+					type="button"
+					className="button" 
+					onClick={this.nextEvent}>Change
+				</button>
 		);
 	}
 }

@@ -2,7 +2,7 @@
 * @Author: guangled
 * @Date:   2017-03-25 13:16:57
 * @Last Modified by:   guangled
-* @Last Modified time: 2017-03-25 19:23:08
+* @Last Modified time: 2017-03-26 02:15:45
 */
 
 html,body {  
@@ -17,7 +17,8 @@ html,body {
 }
 
 .container,
-.app {
+.app,
+.mainb {
 	box-sizing: content-box;
 	max-width: 1600px;
 	height: 100%;

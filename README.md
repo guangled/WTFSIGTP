@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ReduxSimpleStarter
 
 Interested in learning [Redux](https://www.udemy.com/react-redux/)?
@@ -23,3 +24,7 @@ Click [here](https://github.com/StephenGrider/ReactStarter/releases) then downlo
 	> npm install
 	> npm start
 ```
+=======
+# WTFSIGTP
+Where the fuck should I go to play?
+>>>>>>> 80fb59c52ea1dd8d01c00b9f76bd34cd45bf5b24
