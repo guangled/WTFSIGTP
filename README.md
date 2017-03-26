@@ -13,4 +13,4 @@ Where the fuck should I go to play?
 
 # Reference
 1. https://github.com/StephenGrider/ReduxSimpleStarter.git
-This project is our start point and it provides a simple react.js development environment. If you want to develop a simple react.js application, you can try this project.
+This project is our start point and it provides a simple React development environment. If you want to develop a simple React-based application, you can try this project.
